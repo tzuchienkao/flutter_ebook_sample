@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_sample_ch5/sample/drawer_singal_view.dart';
+import 'package:flutter_ebook_sample/sample/drawer_singal_view.dart';
 
 class DrawerLeading extends StatefulWidget {
   @override
