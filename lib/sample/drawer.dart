@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_ebook_sample/sample/drawer_singal_view.dart';
 
 class DrawerLeading extends StatefulWidget {
