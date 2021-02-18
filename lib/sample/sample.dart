@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_sample_ch5/sample/drawer.dart';
-import 'package:flutter_sample_ch5/sample/bottom_nav.dart';
-import 'package:flutter_sample_ch5/sample/future.dart';
+import 'package:flutter_ebook_sample/sample/drawer.dart';
+import 'package:flutter_ebook_sample/sample/bottom_nav.dart';
+import 'package:flutter_ebook_sample/sample/future.dart';
 
 class Person with ChangeNotifier {
   Person({this.counter = 0});
