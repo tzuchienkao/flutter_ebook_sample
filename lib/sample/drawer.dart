@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ebook_sample/sample/drawer_singal_view.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_ebook_sample/sample/sample.dart' show Person;
+// import 'package:flutter_ebook_sample/sample/drawer_singal_view.dart';
 
 class DrawerLeading extends StatefulWidget {
   @override
@@ -35,6 +37,27 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    return DrawerSingalView(navList: navList, gridList: gridList);
+    return Drawer(
+        child: ListView(
+      children: [
+        Provider.of<Person>(context).counter != 0
+            ? UserAccountsDrawerHeader(
+                accountName: Text('Agnes'),
+                accountEmail: Text('oyan114@gmail.com'),
+                currentAccountPicture: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: DecoratedBox(
+                      decoration: BoxDecoration(color: Colors.orange),
+                      child: Padding(
+                        padding: EdgeInsets.all(0),
+                      )),
+                ),
+              )
+            : ListTile(
+                title: Text('Drawer'),
+              ),
+      ],
+    ));
+    // return DrawerSingalView(navList: navList, gridList: gridList);
   }
 }
