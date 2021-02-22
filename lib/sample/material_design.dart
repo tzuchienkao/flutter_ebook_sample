@@ -49,10 +49,25 @@ class DefaultPage extends StatelessWidget {
               ),
             ),
             drawer: AppDrawer(),
-            body: Center(child: AppAsync()),
+            body: WillPopScope(
+                child: Center(child: AppAsync()),
+                onWillPop: () async =>
+                    showDialog(
+                        context: context,
+                        builder: (context) =>
+                            AlertDialog(title: Text('Are you sure you want to quit?'), actions: <Widget>[
+                              RaisedButton(
+                                  child: Text('sure'),
+                                  onPressed: () => Navigator.of(context).pop(true)),
+                              RaisedButton(
+                                  child: Text('cancel'),
+                                  onPressed: () => Navigator.of(context).pop(false)),
+                            ])
+                    )),
             floatingActionButton: AppDialog(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: AppBottomNav()));
   }
 }
+
