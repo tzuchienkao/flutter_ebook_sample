@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_ebook_sample/sample/drawer.dart';
 import 'package:flutter_ebook_sample/sample/bottom_nav.dart';
 import 'package:flutter_ebook_sample/sample/future.dart';
+import 'package:flutter_ebook_sample/sample/future_builder.dart';
 import 'package:flutter_ebook_sample/sample/sample.dart' show Person;
 
 final List<Tab> appTabs = <Tab>[
@@ -37,11 +38,13 @@ class DefaultPage extends StatelessWidget {
         length: appTabs.length,
         child: Scaffold(
             appBar: AppBar(
-              title: Provider.of<Person>(context).counter != 0
-                  ? Text('Count: ${Provider.of<Person>(context).counter}',
-                      style: TextStyle(color: Colors.white))
-                  : Text('Flutter Sample',
-                      style: TextStyle(color: Colors.white)),
+              title: Consumer<Person>(
+                builder: (context, data, child) {
+                  return data.counter != 0
+                      ? Text('${data.counter}')
+                      : Text('Flutter Sample');
+                },
+              ),
               leading: DrawerLeading(),
               bottom: TabBar(
                 isScrollable: true,
@@ -51,23 +54,23 @@ class DefaultPage extends StatelessWidget {
             drawer: AppDrawer(),
             body: WillPopScope(
                 child: Center(child: AppAsync()),
-                onWillPop: () async =>
-                    showDialog(
-                        context: context,
-                        builder: (context) =>
-                            AlertDialog(title: Text('Are you sure you want to quit?'), actions: <Widget>[
+                onWillPop: () async => showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                            title: Text('Are you sure you want to quit?'),
+                            actions: <Widget>[
                               RaisedButton(
                                   child: Text('sure'),
-                                  onPressed: () => Navigator.of(context).pop(true)),
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(true)),
                               RaisedButton(
                                   child: Text('cancel'),
-                                  onPressed: () => Navigator.of(context).pop(false)),
-                            ])
-                    )),
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(false)),
+                            ]))),
             floatingActionButton: AppDialog(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: AppBottomNav()));
   }
 }
-
